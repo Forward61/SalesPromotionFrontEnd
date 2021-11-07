@@ -7,7 +7,7 @@
       <el-form-item label="折扣价" prop="promotionPrice">
         <el-input v-model="ruleForm.promotionPrice"></el-input>
       </el-form-item>
-      <el-form-item label="开始日期" prop="beginDate">
+      <el-form-item label="开始日期" prop="beginToEndDate">
         <el-date-picker
                 v-model="ruleForm.beginToEndDate"
                 type="daterange"
@@ -39,7 +39,7 @@
 <!--      </el-form-item>-->
 
       <el-form-item>
-        <el-button type="primary" @click="queryForm('ruleForm')">查询</el-button>
+<!--        <el-button type="primary" @click="queryForm('ruleForm')">查询</el-button>-->
         <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
@@ -90,20 +90,18 @@
           },
           tableData: [],
           rules: {
-            // goodsName: [
-            //   { required: true, message: '请输入姓名', trigger: 'blur' },
-            //   { min: 1, max: 200, message: '长度在 1 到 200 个字符', trigger: 'blur' }
-            // ]
-            // ,
-            // injecttimes: [
-            //   { required: true, message: '请选择活动区域', trigger: 'change' }
-            // ],
-            // date1: [
-            //   { type: 'date', required: true, message: '请选择日期', trigger: 'change' }
-            // ],
-            // date2: [
-            //   { type: 'date', required: true, message: '请选择时间', trigger: 'change' }
-            // ],
+            goodsName: [
+              { required: true, message: '请输入商品名', trigger: 'blur' },
+              { min: 1, max: 200, message: '长度在 1 到 200 个字', trigger: 'blur' }
+            ]
+            ,
+            promotionPrice: [
+              { required: true, message: '请选择优惠价', trigger: 'change' }
+            ],
+            beginToEndDate: [
+              { required: true, message: '请选择促销日期', trigger: 'blur' }
+            ]
+
             // type: [
             //   { type: 'array', required: true, message: '请至少选择一个活动性质', trigger: 'change' }
             // ],
@@ -121,6 +119,8 @@
           this.$refs[formName].validate((valid) => {
             if(valid){
               var a = a;
+            }else{
+              alert('请输入所需信息');
             }
             var _this = this;
             console.log(_this.ruleForm.beginToEndDate);
@@ -133,9 +133,10 @@
               .then(res=>{
                 console.log(res.data);
                 if(1===res.data){
-                  alert('添加成功');
+                  alert(_this.ruleForm.goodsName +'添加成功');
+                  _this.resetForm(_this.ruleForm);
                 }else{
-                  alert('添加失败');
+                  alert(_this.ruleForm.goodsName +'添加失败');
                 }
 
 
@@ -143,9 +144,9 @@
 
           });
         },
-        // resetForm(formName) {
-        //   this.$refs[formName].resetFields();
-        // },
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+        },
         queryForm(){
 
             var _this = this;

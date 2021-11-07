@@ -33,7 +33,7 @@
 <!--      </el-form-item>-->
       <el-form-item>
         <el-button type="primary" @click="queryForm('ruleForm')">查询</el-button>
-        <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>
+<!--        <el-button type="primary" @click="submitForm('ruleForm')">添加</el-button>-->
         <el-button @click="resetForm('ruleForm')">重置</el-button>
       </el-form-item>
     </el-form>
@@ -86,11 +86,12 @@
             homeaddress: ''
           },
           tableData: [],
+          postUrl: '',
           rules: {
-            // goodsName: [
-            //   { required: true, message: '请输入姓名', trigger: 'blur' },
-            //   { min: 1, max: 200, message: '长度在 1 到 200 个字符', trigger: 'blur' }
-            // ]
+            goodsName: [
+              { required: true, message: '请输入商品名', trigger: 'blur' },
+              { min: 1, max: 200, message: '长度在 1 到 200 个字符', trigger: 'blur' }
+            ]
             // ,
             // injecttimes: [
             //   { required: true, message: '请选择活动区域', trigger: 'change' }
@@ -120,9 +121,10 @@
               var a = a;
             }
             var _this = this;
+
             var reqdata = this.$qs.stringify(_this.ruleForm);
             this.$axios
-              .post('http://localhost:8086/search/1',reqdata)
+              .post('http://118.24.52.46:8086/search/1',reqdata)
               .then(res=>{
                 console.log(res.data);
                 _this.tableData=res.data;
@@ -138,8 +140,15 @@
 
             var _this = this;
             // var queryreqdata = this.$qs.stringify(_this.ruleForm);
+
+          if(_this.ruleForm.goodsName.length >0){
+            _this.postUrl = 'http://118.24.52.46:8086/searchByGoodsName/'+_this.ruleForm.goodsName;
+          }else{
+            _this.postUrl='http://118.24.52.46:8086/searchAll/'
+          }
+
             this.$axios
-                .post('http://localhost:8086/searchByGoodsName/'+_this.ruleForm.goodsName)
+                .post(_this.postUrl)
                 .then(res=>{
                   console.log(res.data);
                   // _this.ruleForm = res.data[0];
