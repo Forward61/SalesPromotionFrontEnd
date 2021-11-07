@@ -56,8 +56,10 @@
 
 
       <el-table-column
-        prop="beginDate"
-        label="开始日期">
+          prop="beginDate"
+
+          label="开始日期">
+
       </el-table-column>
       <el-table-column
         prop="endDate"
@@ -133,9 +135,11 @@
 
           });
         },
-        // resetForm(formName) {
-        //   this.$refs[formName].resetFields();
-        // },
+        resetForm(formName) {
+          this.$refs[formName].resetFields();
+          this.queryForm()
+
+          },
         queryForm(){
 
             var _this = this;

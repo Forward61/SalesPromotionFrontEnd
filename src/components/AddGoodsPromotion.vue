@@ -129,7 +129,7 @@
             console.log( _this.ruleForm.beginToEndDate[0].toLocaleDateString());
             var reqdata = this.$qs.stringify(_this.ruleForm);
             this.$axios
-              .post('http://localhost:8086/sales/insertGoodsInfo',reqdata)
+              .post('http://118.24.52.46:8086/sales/insertGoodsInfo',reqdata)
               .then(res=>{
                 console.log(res.data);
                 if(1===res.data){
