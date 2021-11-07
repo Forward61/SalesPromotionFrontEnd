@@ -1,12 +1,28 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-
+import SalesPromotionMain from "../components/SalesPromotionMain";
+import AddGoodsPromotion from "../components/AddGoodsPromotion";
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
+    name: 'SalesPromotionMain',
+    children: [
+      {
+        path: '/',
+        component: SalesPromotionMain
+      }
+    ]
+  },
+  {
+    path: '/AddGoodsPromotion',
+    name: 'AddGoodsPromotion',
+    component: AddGoodsPromotion
+  },
+  {
+    path: '/Home',
     name: 'Home',
     component: Home
   },
