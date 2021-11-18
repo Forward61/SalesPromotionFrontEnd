@@ -146,9 +146,9 @@
             // var queryreqdata = this.$qs.stringify(_this.ruleForm);
 
           if(_this.ruleForm.goodsName.length >0){
-            _this.postUrl = 'http://118.24.52.46:8086/searchByGoodsName/'+_this.ruleForm.goodsName;
+            _this.postUrl = 'https://ifreedom61.xyz/salesapi/searchByGoodsName/'+_this.ruleForm.goodsName;
           }else{
-            _this.postUrl='http://118.24.52.46:8086/searchAll/'
+            _this.postUrl='https://ifreedom61.xyz/salesapi/searchAll/'
           }
 
             this.$axios

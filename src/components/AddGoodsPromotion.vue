@@ -115,7 +115,9 @@
         };
       },
       methods: {
-        submitForm(formName) {
+
+
+          submitForm(formName) {
           this.$refs[formName].validate((valid) => {
             if(valid){
               var a = a;
@@ -129,12 +131,15 @@
             console.log( _this.ruleForm.beginToEndDate[0].toLocaleDateString());
             var reqdata = this.$qs.stringify(_this.ruleForm);
             this.$axios
-              .post('http://118.24.52.46:8086/sales/insertGoodsInfo',reqdata)
+              .post('https://ifreedom61.xyz/salesapi/sales/insertGoodsInfo',reqdata)
               .then(res=>{
                 console.log(res.data);
                 if(1===res.data){
                   alert(_this.ruleForm.goodsName +'添加成功');
-                  _this.resetForm(_this.ruleForm);
+                  _this.ruleForm.goodsName ='';
+                  _this.ruleForm.originalPrice = '',
+                      _this.ruleForm.promotionPrice =''
+
                 }else{
                   alert(_this.ruleForm.goodsName +'添加失败');
                 }
@@ -145,7 +150,10 @@
           });
         },
         resetForm(formName) {
-          this.$refs[formName].resetFields();
+          // this.$refs[formName].resetFields();
+            this.$nextTick(()=>{
+                this.$refs[formName].resetFields();
+            })
         },
         queryForm(){
 
