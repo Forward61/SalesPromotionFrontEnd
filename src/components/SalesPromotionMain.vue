@@ -151,7 +151,12 @@
             _this.postUrl='https://ifreedom61.xyz/salesapi/searchAll/'
           }
 
-            this.$axios
+          console.log('this  ' + this)
+          console.log('this axios :' + this.axios1 )
+          console.log('this axios :' + _this.axios1 )
+
+
+          this.axios1
                 .post(_this.postUrl)
                 .then(res=>{
                   console.log(res.data);
